@@ -15,6 +15,10 @@ type BookService struct {
 	db *sql.DB
 }
 
+func NewBookService(db *sql.DB) *BookService {
+	return &BookService{db: db}
+}
+
 func (s *BookService) CreateBook(book *Book) error {
 	query := "Insert into books (title,author,genre) values (?,?,?)"
 	result, err := s.db.Exec(query, book.Title, book.Author, book.Genre)
